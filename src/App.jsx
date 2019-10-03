@@ -1,9 +1,12 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import Intro from './components/Intro';
 import Button from './components/Button';
+import VehicleCard from './components/VehicleCard';
+import { BrowserRouter } from 'react-router-dom';
 
 const SearchForm = () => (
-  <form className="mt-12">
+  <form>
     <input
       className="w-full p-3 rounded border-2 border-gray-300 focus:border-gray-400"
       placeholder="Enter VIN"
@@ -22,14 +25,23 @@ const SearchForm = () => (
 );
 
 const App = () => (
-  <div className="min-h-screen bg-gray-200 flex justify-center">
-    <div className="w-full max-w-lg py-24">
-      <Intro />
-      <SearchForm />
+  <BrowserRouter>
+    <div className="min-h-screen bg-gray-200 flex justify-center">
+      <div className="w-full max-w-lg py-24">
+        <Intro />
 
-      
+        <div className="mt-12">
+          <SearchForm />
+        </div>
+
+        <VehicleCard
+          body_type="SUV"
+          transmission="Automatic"
+          std_seating="5"
+        />
+      </div>
     </div>
-  </div>
+  </BrowserRouter>
 );
 
 export default App;
