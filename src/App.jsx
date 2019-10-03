@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Intro from './components/Intro';
 import Button from './components/Button';
 import VehicleCard from './components/VehicleCard';
-import { BrowserRouter } from 'react-router-dom';
 
 const SearchForm = () => (
   <form>
