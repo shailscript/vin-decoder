@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 import Error from './Error';
 
-const SearchForm = ({ vin, handleSearchAction }) => {
+const SearchForm = ({ vin, onSubmit }) => {
   const [input, setInput] = useState(vin);
   const [error, setError] = useState('');
 
@@ -11,7 +11,7 @@ const SearchForm = ({ vin, handleSearchAction }) => {
     event.preventDefault();
     if (input.length === 17 && !input.match(/[^A-Z0-9]/)) {
       setError('');
-      handleSearchAction(input);
+      onSubmit(input);
     } else {
       setError('Enter 17 character alphanumeric [A-Z, 0-9] VIN.');
     }
@@ -49,7 +49,7 @@ SearchForm.defaultProps = {
 
 SearchForm.propTypes = {
   vin: PropTypes.string,
-  handleSearchAction: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default SearchForm;
