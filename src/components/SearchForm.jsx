@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Button from './ButtonLike';
 import Error from './Error';
+import ButtonLike from './ButtonLike';
 
 const SearchForm = ({ vin, onSubmit }) => {
   const [input, setInput] = useState(vin);
@@ -35,14 +35,22 @@ const SearchForm = ({ vin, onSubmit }) => {
 
       {error ? rError : rNoError}
 
-      <div className="mt-2 flex justify-center">
-        <Button className="bg-gray-300 hover:bg-gray-400 text-gray-800">
-          View Code
-        </Button>
+      <div className="mt-4 flex justify-center">
+        <a
+          href="https://github.com/shailscript/vin-decoder/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <ButtonLike className="bg-gray-300 hover:bg-gray-400 text-gray-800">
+            View Code
+          </ButtonLike>
+        </a>
 
-        <Button className="bg-blue-600 hover:bg-blue-700 text-blue-100">
-          Submit
-        </Button>
+        <button type="submit">
+          <ButtonLike className="bg-blue-600 hover:bg-blue-700 text-blue-100">
+            Submit
+          </ButtonLike>
+        </button>
       </div>
     </form>
   );
