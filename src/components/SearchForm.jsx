@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import Button from '../components/Button';
-import Error from '../components/Error';
+import PropTypes from 'prop-types';
+import Button from './Button';
+import Error from './Error';
 
 const SearchForm = ({ vin, handleSearchAction }) => {
-  const [input, setInput] = useState(vin || '');
+  const [input, setInput] = useState(vin);
   const [error, setError] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(input.match('/[^a-zA-Z0-9]/') && input.length === 17) {
+    if (input.length === 17 && !input.match(/[^A-Z0-9]/)) {
       setError('');
       handleSearchAction(input);
     } else {
       setError('Invalid input! Enter 17 character alphanumeric [A-Z, 0-9] VIN');
-    };
+    }
   };
 
   return (
@@ -27,8 +28,7 @@ const SearchForm = ({ vin, handleSearchAction }) => {
 
       { error
         ? <Error message={error} />
-        : null
-      }
+        : null}
 
       <div className="mt-2 flex justify-center">
         <Button className="bg-gray-300 hover:bg-gray-400 text-gray-800">
@@ -41,6 +41,15 @@ const SearchForm = ({ vin, handleSearchAction }) => {
       </div>
     </form>
   );
+};
+
+SearchForm.defaultProps = {
+  vin: '',
+};
+
+SearchForm.propTypes = {
+  vin: PropTypes.string,
+  handleSearchAction: PropTypes.func.isRequired,
 };
 
 export default SearchForm;
