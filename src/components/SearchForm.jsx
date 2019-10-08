@@ -17,18 +17,23 @@ const SearchForm = ({ vin, onSubmit }) => {
     }
   };
 
+  const hanleChange = (event) => {
+    setInput(event.target.value);
+  };
+
+  const rError = <Error message={error} />;
+  const rNoError = null;
+
   return (
     <form onSubmit={handleSubmit}>
       <input
         className="w-full p-3 rounded border-2 border-gray-300 focus:border-gray-400"
         placeholder="Enter VIN"
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={hanleChange}
       />
 
-      { error
-        ? <Error message={error} />
-        : null}
+      {error ? rError : rNoError}
 
       <div className="mt-2 flex justify-center">
         <Button className="bg-gray-300 hover:bg-gray-400 text-gray-800">
