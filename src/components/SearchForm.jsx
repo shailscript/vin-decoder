@@ -13,7 +13,7 @@ const SearchForm = ({ vin, handleSearchAction }) => {
       setError('');
       handleSearchAction(input);
     } else {
-      setError('Invalid input! Enter 17 character alphanumeric [A-Z, 0-9] VIN');
+      setError('Enter 17 character alphanumeric [A-Z, 0-9] VIN.');
     }
   };
 
