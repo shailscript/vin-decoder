@@ -12,10 +12,6 @@ import Error from '../components/Error';
 const SearchPage = ({ vin }) => {
   const history = useHistory();
 
-  const handleSearchAction = (validVin) => {
-    history.push(`/search?vin=${validVin}`);
-  };
-
   const url = `http://marketcheck-prod.apigee.net/v1/vin/${vin}/specs?api_key=${apiKey}`;
 
   const rLoader = (
@@ -27,6 +23,10 @@ const SearchPage = ({ vin }) => {
     />
   );
   const rNoLoader = null;
+
+  const handleSearchAction = (submittedVin) => {
+    history.push(submittedVin ? `/search?vin=${submittedVin}` : '/search');
+  };
 
   const rSearchForm = (
     <SearchForm

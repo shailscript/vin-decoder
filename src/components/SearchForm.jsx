@@ -14,6 +14,7 @@ const SearchForm = ({ vin, onSubmit }) => {
       onSubmit(input);
     } else {
       setError('Enter 17 character alphanumeric [A-Z, 0-9] VIN.');
+      onSubmit();
     }
   };
 
