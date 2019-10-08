@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useHistory } from 'react-router';
 import { parse } from 'qs';
 import { apiKey } from '../config';
 import Intro from '../components/Intro';
@@ -12,15 +13,16 @@ const withQuery = Component => ({ location: { search } }) => {
 }
 
 const SearchPage = ({ vin }) => {
+  const history = useHistory();
+
   const handleSearchAction = (validVin) => {
-    //Set URL with Valid VIN
+    history.push(`/search?vin=${validVin}`);
   }
 
   const requestParams = {
     url : `http://marketcheck-prod.apigee.net/v1/vin/${vin}/specs?api_key=${apiKey}`, 
     params: {
       method: 'GET',
-      headers: { Host: 'marketcheck-prod.apigee.net' },
     },
   };
 
