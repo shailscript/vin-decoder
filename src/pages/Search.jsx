@@ -1,41 +1,47 @@
-import React from 'react';
-import Button from '../components/Button';
-import VehicleCard from '../components/VehicleCard';
+import React, { useState } from 'react';
+import { parse } from 'qs';
+import { apiKey } from '../config';
 import Intro from '../components/Intro';
+import Loader from '../components/Loader';
+import SearchForm from '../components/SearchForm';
 
-const SearchForm = () => (
-  <form>
-    <input
-      className="w-full p-3 rounded border-2 border-gray-300 focus:border-gray-400"
-      placeholder="Enter VIN"
-    />
+const withQuery = Component => ({ location: { search } }) => {
+  const searchCleaned = search.replace('?', '');
+  const query = parse(searchCleaned);
+  return <Component {...query} />
+}
 
-    <div className="mt-2 flex justify-center">
-      <Button className="bg-gray-300 hover:bg-gray-400 text-gray-800">
-        View Code
-      </Button>
+const SearchPage = ({ vin }) => {
+  const handleSearchAction = (validVin) => {
+    //Set URL with Valid VIN
+  }
 
-      <Button className="bg-blue-600 hover:bg-blue-700 text-blue-100">
-        Submit
-      </Button>
+  const requestParams = {
+    url : `http://marketcheck-prod.apigee.net/v1/vin/${vin}/specs?api_key=${apiKey}`, 
+    params: {
+      method: 'GET',
+      headers: { Host: 'marketcheck-prod.apigee.net' },
+    },
+  };
+
+  return (
+    <div className="w-full max-w-lg py-24">
+      <Intro />
+
+      <div className="mt-12">
+        <SearchForm 
+          vin={vin}
+          handleSearchAction={handleSearchAction}
+        />
+      </div>
+
+      { vin
+      ? <Loader requestParams={requestParams}/>
+      : null
+      }
+
     </div>
-  </form>
-);
+  )
+};
 
-const SearchPage = () => (
-  <div className="w-full max-w-lg py-24">
-    <Intro />
-
-    <div className="mt-12">
-      <SearchForm />
-    </div>
-
-    <VehicleCard
-      body_type="SUV"
-      transmission="Automatic"
-      std_seating="5"
-    />
-  </div>
-);
-
-export default SearchPage;
+export default withQuery(SearchPage);
