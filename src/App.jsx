@@ -8,6 +8,7 @@ const App = () => (
     <BrowserRouter>
       <Switch>
         <Route
+          exact
           path="/"
           component={HomePage}
         />
