@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import VehicleCard from './VehicleCard';
-import Error from './Error';
 
-const Loader = ({ url }) => {
+const Loader = ({ url, onSuccess, onError }) => {
   const [data, setData] = useState('');
   const [error, setError] = useState('');
 
@@ -26,28 +24,18 @@ const Loader = ({ url }) => {
 
   useEffect(fetchData, [url]);
 
-  const rData = (
-    <VehicleCard
-      body_type="SUV"
-      transmission="Automatic"
-      std_seating="5"
-    />
-  );
-  const rNoData = null;
-
-  const rError = <Error message={error} />;
-  const rNoError = null;
-
   return (
     <div>
-      {data ? rData : rNoData}
-      {error ? rError : rNoError}
+      {data ? onSuccess(data) : null}
+      {error ? onError(error) : null}
     </div>
   );
 };
 
 Loader.propTypes = {
   url: PropTypes.string.isRequired,
+  onSuccess: PropTypes.func.isRequired,
+  onError: PropTypes.func.isRequired,
 };
 
 export default Loader;

@@ -6,6 +6,8 @@ import withQuery from '../hocs/withQuery';
 import Intro from '../components/Intro';
 import Loader from '../components/Loader';
 import SearchForm from '../components/SearchForm';
+import VehicleCard from '../components/VehicleCard';
+import Error from '../components/Error';
 
 const SearchPage = ({ vin }) => {
   const history = useHistory();
@@ -16,7 +18,14 @@ const SearchPage = ({ vin }) => {
 
   const url = `http://marketcheck-prod.apigee.net/v1/vin/${vin}/specs?api_key=${apiKey}`;
 
-  const rLoader = <Loader url={url} />;
+  const rLoader = (
+    <Loader
+      url={url}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      onSuccess={(vehicle) => <VehicleCard {...vehicle} />}
+      onError={(error) => <Error message={error} />}
+    />
+  );
   const rNoLoader = null;
 
   const rSearchForm = (
