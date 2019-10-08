@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ButtonLike = ({ children, className, ...rest }) => (
   <span
-    className={`m-2 px-4 py-2 rounded uppercase tracking-wider cursor-pointer ${className}`}
+    className={`m-2 px-4 py-2 rounded uppercase tracking-wider inline-block cursor-pointer ${className}`}
     // eslint-disable-next-line react/jsx-props-no-spreading
     {...rest}
   >
