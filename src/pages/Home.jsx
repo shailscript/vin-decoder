@@ -3,9 +3,17 @@ import { Link } from 'react-router-dom';
 import Button from '../components/ButtonLike';
 
 const Home = () => (
-  <div>
-    <Link to="/search">
-      <Button>
+  <div className="my-16 text-center">
+    <p>
+      Just to show I know react router.
+    </p>
+
+    <p className="mt-4 text-2xl">
+      &#128526;
+    </p>
+
+    <Link to="/search" className="mt-8 block">
+      <Button className="bg-white">
         Search
       </Button>
     </Link>
