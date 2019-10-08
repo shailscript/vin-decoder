@@ -17,7 +17,7 @@ const SearchForm = ({ vin, onSubmit }) => {
     }
   };
 
-  const hanleChange = (event) => {
+  const handleChange = (event) => {
     setInput(event.target.value);
   };
 
@@ -30,7 +30,7 @@ const SearchForm = ({ vin, onSubmit }) => {
         className="w-full p-3 rounded border-2 border-gray-300 focus:border-gray-400"
         placeholder="Enter VIN"
         value={input}
-        onChange={hanleChange}
+        onChange={handleChange}
       />
 
       {error ? rError : rNoError}
