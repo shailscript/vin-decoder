@@ -10,8 +10,14 @@ const Loader = ({ url }) => {
   const fetchData = () => {
     fetch(url)
       .then((response) => response.json())
-      .then(setData)
-      .catch((err) => setError(err.message));
+      .then((result) => {
+        setError('');
+        setData(result);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setData();
+      });
   };
 
   useEffect(fetchData, [url]);
