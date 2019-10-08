@@ -5,7 +5,7 @@ import Button from '../components/ButtonLike';
 const Home = () => (
   <div className="my-16 text-center">
     <p>
-      Just to show I know react router.
+      Just to say I know react router, now.
     </p>
 
     <p className="mt-4 text-2xl">
