@@ -7,17 +7,21 @@ const Loader = ({ url }) => {
   const [data, setData] = useState('');
   const [error, setError] = useState('');
 
+  const handleSuccess = (result) => {
+    setError('');
+    setData(result);
+  };
+
+  const handleFailure = ({ message }) => {
+    setError(message);
+    setData();
+  };
+
   const fetchData = () => {
     fetch(url)
       .then((response) => response.json())
-      .then((result) => {
-        setError('');
-        setData(result);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setData();
-      });
+      .then(handleSuccess)
+      .catch(handleFailure);
   };
 
   useEffect(fetchData, [url]);
