@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const Loader = ({ url, onSuccess, onError }) => {
-  const [data, setData] = useState('');
-  const [error, setError] = useState('');
+const Loader = ({ url, init, onSuccess, onError }) => {
+  const [data, setData] = useState();
+  const [error, setError] = useState();
 
   const handleSuccess = (result) => {
-    setError('');
+    setError();
     setData(result);
   };
 
@@ -16,7 +16,7 @@ const Loader = ({ url, onSuccess, onError }) => {
   };
 
   const fetchData = () => {
-    fetch(url)
+    fetch(url, init)
       .then((response) => response.json())
       .then(handleSuccess)
       .catch(handleFailure);
@@ -34,8 +34,14 @@ const Loader = ({ url, onSuccess, onError }) => {
 
 Loader.propTypes = {
   url: PropTypes.string.isRequired,
+  init: PropTypes.object,
   onSuccess: PropTypes.func.isRequired,
-  onError: PropTypes.func.isRequired,
+  onError: PropTypes.func,
+};
+
+Loader.defaultProps = {
+  init: {},
+  onError: console.log,
 };
 
 export default Loader;
